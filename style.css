@@ -1,0 +1,24 @@
+.centered{
+	position:absolute;
+	left:0; right:0; bottom:0; top:0;
+	margin:auto;
+}
+
+.size-imageslider{
+	width:600px;
+	height:373px;
+	background:black;
+}
+
+.imageslider-img{
+	display: block;
+	width: 100%;
+	height: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	righT: 0;
+	margin: auto;
+	position: Absolute;
+	transition:left .75s ease, right .75s ease, top .75s ease, bottom .75s ease;
+}

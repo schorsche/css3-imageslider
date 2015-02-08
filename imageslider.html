@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Imageslider Demo</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script type="text/javascript" src="imageslider.js"></script>
+</head>
+<body>
+	<div id="imageslider-demo" class="centered size-imageslider"></div>
+	<script type="text/javascript">
+		(function(){
+			var imageslider_demo = document.getElementById("imageslider-demo");
+			var options = {
+				src: [
+					"img/Die erste Busfahrt (Biberach->Valence).jpg",
+					"img/Die erste Busfahrt 2.jpg",
+					"img/Ankunft in Valence.jpg",
+					"img/Rathaus Valence.jpg",
+					"img/Spanische Tundra.jpg",
+					"img/Barcelona.jpg",
+					"img/Barcelona Sagrada 1.jpg",
+					"img/Sagrada Familia 1.jpg",
+					"img/Architektur in Valencia.jpg",
+					"img/Chillen am Strand (Valencia).jpg",
+					"img/Servant (Freizeit).jpg"
+				],
+				interval: 3000
+			};
+
+			var slider = new ImageSlider(imageslider_demo, options);
+			slider.start();
+		})();
+	</script>
+</body>
+</html>
