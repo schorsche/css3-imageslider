@@ -78,4 +78,4 @@ ImageSlider.prototype.setOptions(optDict)
 ```
 
 
-Check imageslider.html for a demo.
+Check [imageslider.html](https://rawgit.com/schorsche/css3-imageslider/master/imageslider.html) for a demo.
