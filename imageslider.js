@@ -2,7 +2,6 @@ function ImageSlider(el, options){
 	// TODO multiple input possibilities here
 	// querySelector, byID, jQuery(), etc.
 	this.el = el;
-	this.imageslider_css = "display: block;width: 100%;height: auto;top: 0;bottom: 0;left: 0;right: 0;margin: auto;position: absolute;transition:left .75s ease;"
 	this.viewingIndex = 0;
 	if (options){
 		this.opt = options;
