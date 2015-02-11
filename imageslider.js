@@ -2,27 +2,39 @@ function ImageSlider(el, options){
 	// TODO multiple input possibilities here
 	// querySelector, byID, jQuery(), etc.
 	this.el = el;
+	this.imageslider_css = "display: block;width: 100%;height: auto;top: 0;bottom: 0;left: 0;right: 0;margin: auto;position: absolute;transition:left .75s ease;"
 	this.viewingIndex = 0;
-	this.direction = "left"
 	if (options){
 		this.opt = options;
 	} else {
 		this.opt = {
 			src: [],	
-			interval: 3000
-			// src: document.querySelector("#ul-images"),	
+			interval: 3000	
 		};
+	}
+
+	// Defaults
+	if (!options.interval){
+		this.opt.interval = 3000;
 	}
 
 	el.style.overflow = "hidden"
 }
 
+/* Append a new Image to the ImageSlider Object. */
 ImageSlider.rebuild = function(el,src,callback){
 	var imgNode = document.createElement("img");
 	imgNode.onload = function(){
+		/* When the new Image is loaded, scroll the one already there
+		   to the left. The new Image slides to the left at the same time,
+		   creating a smooth transition. */
 		if (el.childNodes.length > 1){
 			el.firstChild.style.left = "-" + el.offsetWidth + "px";
 			el.firstChild.classList.remove("active");
+			/* Once the fading image has scrolled out of view completely, it
+			   has to be removed before the next loadNext() starts. */
+
+			// TODO dirty hax for IE < 9
 			el.firstChild.addEventListener("transitionend", function(){
 				this.parentNode.removeChild(this);
 			},false)
@@ -30,22 +42,19 @@ ImageSlider.rebuild = function(el,src,callback){
 		callback();
 	}
 	imgNode.setAttribute("class", "imageslider-img active");
-	imgNode.style.left = el.offsetWidth + "px"
+	imgNode.setAttribute("style","display: block;width: 100%;height: auto;top: 0;bottom: 0;left: 0;right: 0;margin: auto;position: absolute;transition:left .75s ease;" + "left:" + el.offsetWidth + "px;");
 	imgNode.setAttribute("src", src);
 	el.appendChild(imgNode);
 }
 
-// Setter for this.opt.src
 ImageSlider.prototype.addImage = function(imgSrc){
 	this.opt.src.add(imgSrc);
 }
 
-// Getter for Options
 ImageSlider.prototype.getOptions = function(){
 	return this.opt;
 }
 
-// Setter for Options
 ImageSlider.prototype.setOptions = function(optDict){
 	this.opt = optDict;
 }
@@ -63,7 +72,8 @@ ImageSlider.prototype.stop = function(){
 }
 
 ImageSlider.prototype.loadNext = function(fileName){
-	// fileName is a optional argument, use src if not supplied
+	/* fileName is optional, in case of supplied fileName the specified image
+	   will be displayed next, the internal src queue stays unmodified */
 	if (fileName === undefined){
 		nextElement = this.opt.src[this.viewingIndex];
 		ImageSlider.rebuild(this.el, nextElement, (function(_el){
@@ -78,8 +88,4 @@ ImageSlider.prototype.loadNext = function(fileName){
 		}
 	} else {
 	}
-}
-
-ImageSlider.prototype.chooseNewDirection = function(){
-	// TODO
 }
